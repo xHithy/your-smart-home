@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SensorController;
+use App\Http\Controllers\SubSectionCategoryController;
 use App\Http\Controllers\SubSectionController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,5 +27,6 @@ Route::prefix('/v1')->group(function () {
         Route::post('/create', [SubSectionController::class, 'createSubsection']);
         Route::put('/edit', [SubSectionController::class, 'editSubsection']);
         Route::delete('/delete/{id}', [SubSectionController::class, 'deleteSubsection']);
+        Route::get('/categories', [SubSectionCategoryController::class, 'getSubSectionCategories']);
     });
 });
