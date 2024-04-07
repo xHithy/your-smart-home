@@ -12,11 +12,17 @@ return new class () extends Migration {
             $table->string('name');
             $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('id')->on('sections');
+            $table->foreign('category_id')->references('id')->on('subsectioncategories');
             $table->timestamps();
 
             $table->foreign('section_id')
                 ->references('id')
                 ->on('sections')
+                ->onDelete('cascade');
+
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('subsectioncategories')
                 ->onDelete('cascade');
         });
     }
