@@ -24,6 +24,7 @@ class SubSectionController extends Controller
         $validation = Validator::make(request()->all(), [
             'name' => 'required|min:2|max:55|string',
             'section_id' => 'required|integer|exists:sections,id',
+            'category_id' => 'required|integer|exists:subsectioncategories,id',
         ]);
 
         if($validation->fails()) {
@@ -33,6 +34,7 @@ class SubSectionController extends Controller
         $newSubsection = SubSection::create([
             'name' => request('name'),
             'section_id' => request('section_id'),
+            'category_id' => request('category_id'),
         ]);
 
         return response()->json([
@@ -47,6 +49,7 @@ class SubSectionController extends Controller
         $validation = Validator::make(request()->all(), [
             'id' => 'required|exists:subsections,id|integer',
             'name' => 'required|string|min:2|max:55',
+            'category_id' => 'required|integer|exists:subsectioncategories,id',
         ]);
 
         if($validation->fails()) {
