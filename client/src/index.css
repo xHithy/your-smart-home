@@ -1,17 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
+
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
-
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
 
 * {
     font-smooth: always;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    text-rendering: geometricPrecision;
     font-family: 'Lato', sans-serif;
 }
 
 body {
-    background-color: rgb(0, 0, 0);
+    background-color: #f2f4f7;
 }
