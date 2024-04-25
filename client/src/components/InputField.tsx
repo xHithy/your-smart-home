@@ -6,6 +6,7 @@ interface Props {
    value: string;
    maxWidth?: number;
    onValueChange: (arg0: string) => void;
+   error?: string[];
 }
 
 const InputField = ({
@@ -14,6 +15,7 @@ const InputField = ({
    value,
    maxWidth,
    onValueChange,
+   error,
 }: Props) => {
    return (
       <label
@@ -23,12 +25,17 @@ const InputField = ({
          <span className='text-sm text-gray-600'>{title}</span>
          <input
             style={{ maxWidth: maxWidth }}
-            className='w-full rounded-md border-0 bg-gray-200 px-4 py-3 text-sm focus:outline-gray-900'
+            className={`w-full rounded-md border-2 bg-gray-200 px-4 py-3 text-sm text-gray-900 focus:outline-gray-900 ${
+               error && error.length > 0 ? 'border-red-500' : 'border-gray-200'
+            }`}
             placeholder={placeholder}
             name={title}
             value={value}
             onChange={(e) => onValueChange(e.target.value)}
          />
+         {error && error.length > 0 && (
+            <span className='text-xs text-red-600'>{error[0]}</span>
+         )}
       </label>
    );
 };
