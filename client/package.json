@@ -10,6 +10,7 @@
     "@types/node": "^16.18.68",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
+    "axios": "^1.6.8",
     "laravel-echo": "^1.15.3",
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.9",
