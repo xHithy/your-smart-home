@@ -14,7 +14,7 @@ const SingleSection = ({ name, color }: Props) => {
       >
          <div className='flex w-full items-center justify-between space-x-1'>
             <span className='text-lg font-bold text-gray-800'>{name}</span>
-            <TbDots className='text-2xl text-gray-800' />
+            <TbDots className='cursor-pointer text-2xl text-gray-800' />
          </div>
       </div>
    );
