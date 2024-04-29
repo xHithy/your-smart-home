@@ -4,9 +4,10 @@ interface Props {
    title: string;
    value: string;
    onValueChange: (arg0: string) => void;
+   error?: string[];
 }
 
-const ColorInput = ({ title, value, onValueChange }: Props) => {
+const ColorInput = ({ title, value, onValueChange, error }: Props) => {
    return (
       <label
          htmlFor={title}
@@ -14,12 +15,17 @@ const ColorInput = ({ title, value, onValueChange }: Props) => {
       >
          <span className='text-sm text-gray-600'>{title}</span>
          <input
-            className='h-12 w-12 rounded-md border-0 bg-gray-200 p-2'
+            className={`h-12 w-12 rounded-md border-2 p-2 ${
+               error && error.length > 0 ? 'border-red-600' : undefined
+            }`}
             type='color'
             name={title}
             value={value}
             onChange={(e) => onValueChange(e.target.value)}
          />
+         {error && error.length > 0 && (
+            <span className='text-xs text-red-600'>{error[0]}</span>
+         )}
       </label>
    );
 };

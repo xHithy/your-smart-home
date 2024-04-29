@@ -27,7 +27,7 @@ class SectionController extends Controller
         ]);
 
         if($validation->fails()) {
-            self::incorrectPayloadFormatResponse($validation->errors());
+            return self::incorrectPayloadFormatResponse($validation->errors());
         }
 
         $newSection = Section::create([
@@ -51,7 +51,7 @@ class SectionController extends Controller
         ]);
 
         if($validation->fails()) {
-            self::incorrectPayloadFormatResponse($validation->errors());
+            return self::incorrectPayloadFormatResponse($validation->errors());
         }
 
         $editedSection = Section::where('id', request('id'))->update([
@@ -73,7 +73,7 @@ class SectionController extends Controller
         ]);
 
         if($validation->fails()) {
-            self::incorrectPayloadFormatResponse($validation->errors());
+            return self::incorrectPayloadFormatResponse($validation->errors());
         }
 
         Section::where('id', $id)->delete();

@@ -1,0 +1,5 @@
+export enum API_RESPONSE {
+   SUCCESS,
+   GENERIC_ERROR,
+   API_ERROR,
+}
