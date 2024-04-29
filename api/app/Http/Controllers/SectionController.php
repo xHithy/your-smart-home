@@ -10,7 +10,7 @@ class SectionController extends Controller
 {
     public static function getSections(): JsonResponse
     {
-        $sections = Section::get();
+        $sections = Section::orderByDesc('created_at')->get();
 
         return response()->json([
             'status' => 200,
