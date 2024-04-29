@@ -34,7 +34,7 @@ export const postSection = async (
       if (query.data.status === 200 || query.data.status === 201) {
          const data = query.data.section;
 
-         setData((prevData: Section[]) => [...prevData, data]);
+         setData((prevData: Section[]) => [data, ...prevData]);
          return {
             type: API_RESPONSE.SUCCESS,
             data: query.data.message,
