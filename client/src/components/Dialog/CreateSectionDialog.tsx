@@ -6,13 +6,13 @@ import FormButton from '../FormButton';
 import { PostSectionError } from '../../queries/postSection';
 
 interface Props {
+   errors: PostSectionError;
    sectionName: string;
    sectionColor: string;
    onClose: () => void;
    onSubmit: () => void;
    setSectionName: (args0: string) => void;
    setSectionColor: (args0: string) => void;
-   errors: PostSectionError;
 }
 
 const CreateSectionDialog = ({
@@ -24,6 +24,11 @@ const CreateSectionDialog = ({
    setSectionName,
    errors,
 }: Props) => {
+   const clearForm = () => {
+      setSectionName('');
+      setSectionColor('#000000');
+   };
+
    return (
       <div className='relative h-screen max-h-screen w-full justify-between bg-gray-100 px-5 py-3 pb-14 shadow-md sm:h-auto sm:max-w-md sm:rounded-md md:pb-3'>
          <div className='flex w-full items-center justify-between pb-2'>
@@ -32,7 +37,10 @@ const CreateSectionDialog = ({
             </h2>
             <div
                className='flex h-10 w-10 cursor-pointer items-center justify-center rounded-md text-gray-900 transition-colors duration-200 hover:bg-blue-600 hover:text-gray-200'
-               onClick={onClose}
+               onClick={() => {
+                  onClose();
+                  clearForm();
+               }}
             >
                <TbX className='cursor-pointer text-2xl' />
             </div>
@@ -54,7 +62,10 @@ const CreateSectionDialog = ({
             <div className='absolute bottom-0 left-0 flex h-auto w-full flex-row-reverse items-center self-end px-5 py-3 pt-5 md:static md:p-0'>
                <FormButton
                   title='Finish'
-                  onSubmit={onSubmit}
+                  onSubmit={() => {
+                     onSubmit();
+                     clearForm();
+                  }}
                />
             </div>
          </div>
