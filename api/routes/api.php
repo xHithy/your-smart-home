@@ -17,7 +17,7 @@ Route::prefix('/v1')->group(function () {
     Route::prefix('/section')->group(function () {
         Route::get('/', [SectionController::class, 'getSections']);
         Route::post('/create', [SectionController::class, 'createSection']);
-        Route::put('/edit', [SectionController::class, 'editSection']);
+        Route::post('/edit', [SectionController::class, 'editSection']);
         Route::delete('/delete/{id}', [SectionController::class, 'deleteSection']);
     });
 
