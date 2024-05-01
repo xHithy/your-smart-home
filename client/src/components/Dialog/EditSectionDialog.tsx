@@ -15,14 +15,14 @@ interface Props {
    setSectionColor: (args0: string) => void;
 }
 
-const CreateSectionDialog = ({
+const EditSectionDialog = ({
+   errors,
+   sectionName,
+   sectionColor,
    onClose,
    onSubmit,
-   sectionColor,
-   setSectionColor,
-   sectionName,
    setSectionName,
-   errors,
+   setSectionColor,
 }: Props) => {
    const clearForm = () => {
       setSectionName('');
@@ -32,9 +32,7 @@ const CreateSectionDialog = ({
    return (
       <div className='relative h-screen max-h-screen w-full justify-between bg-gray-100 px-5 py-3 pb-14 shadow-md sm:h-auto sm:max-w-md sm:rounded-md md:pb-3'>
          <div className='flex w-full items-center justify-between pb-2'>
-            <h2 className='text-2xl font-bold text-gray-900'>
-               Create a section
-            </h2>
+            <h2 className='text-2xl font-bold text-gray-900'>Edit a section</h2>
             <div
                className='flex h-10 w-10 cursor-pointer items-center justify-center rounded-md text-gray-900 transition-colors duration-200 hover:bg-blue-600 hover:text-gray-200'
                onClick={() => {
@@ -73,4 +71,4 @@ const CreateSectionDialog = ({
    );
 };
 
-export default CreateSectionDialog;
+export default EditSectionDialog;

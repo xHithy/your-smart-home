@@ -27,12 +27,13 @@ const HouseSections = () => {
                </span>
             </div>
          ) : (
-            <div className='flex flex-col space-y-2'>
+            <div className='flex flex-col'>
                {sections.map((section, index) => (
                   <SingleSection
                      key={index}
                      name={section.name}
                      color={section.color}
+                     id={section.id}
                   />
                ))}
             </div>

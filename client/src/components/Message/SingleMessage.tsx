@@ -10,7 +10,7 @@ interface Props {
 const SingleMessage = ({ message, type, onRemove }: Props) => {
    if (type === MESSAGE_TYPES.SUCCESS) {
       return (
-         <div className='mb-2 flex w-[200px] flex-col rounded-l-md bg-green-500 text-gray-100 shadow-md'>
+         <div className='mb-2 flex w-[280px] flex-col rounded-l-md bg-green-500 text-gray-100 shadow-md'>
             <div className='flex w-full items-center justify-between px-3 py-1'>
                <span className='font-bold'>Success!</span>
                <TbX
