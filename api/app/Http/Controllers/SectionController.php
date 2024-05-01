@@ -54,10 +54,12 @@ class SectionController extends Controller
             return self::incorrectPayloadFormatResponse($validation->errors());
         }
 
-        $editedSection = Section::where('id', request('id'))->update([
+        Section::where('id', request('id'))->update([
             'name' => request('name'),
             'color' => request('color'),
         ]);
+
+        $editedSection = Section::find(request('id'));
 
         return response()->json([
             'status' => 201,
@@ -69,7 +71,7 @@ class SectionController extends Controller
     public static function deleteSection($id): JsonResponse
     {
         $validation = Validator::make(['id' => $id], [
-            'id' => 'required|exists:section,id|integer',
+            'id' => 'required|exists:sections,id|integer',
         ]);
 
         if($validation->fails()) {
