@@ -28,7 +28,7 @@ class SubSectionController extends Controller
         ]);
 
         if($validation->fails()) {
-            self::incorrectPayloadFormatResponse($validation->errors());
+            return self::incorrectPayloadFormatResponse($validation->errors());
         }
 
         $newSubsection = SubSection::create([
@@ -49,11 +49,11 @@ class SubSectionController extends Controller
         $validation = Validator::make(request()->all(), [
             'id' => 'required|exists:subsections,id|integer',
             'name' => 'required|string|min:2|max:55',
-            'category_id' => 'required|integer|exists:subsectioncategories,id',
+            'category_id' => 'required|integer|exists:sub_section_categories,id',
         ]);
 
         if($validation->fails()) {
-            self::incorrectPayloadFormatResponse($validation->errors());
+            return self::incorrectPayloadFormatResponse($validation->errors());
         }
 
         $editedSubsection = SubSection::where('id', request('id'))->update([
@@ -70,11 +70,11 @@ class SubSectionController extends Controller
     public static function deleteSubsection($id): JsonResponse
     {
         $validation = Validator::make(['id' => $id], [
-            'id' => 'required|integer|exists:subsections,id',
+            'id' => 'required|integer|exists:sub_sections,id',
         ]);
 
         if($validation->fails()) {
-            self::incorrectPayloadFormatResponse($validation->errors());
+            return self::incorrectPayloadFormatResponse($validation->errors());
         }
 
         SubSection::where('id', $id)->delete();
