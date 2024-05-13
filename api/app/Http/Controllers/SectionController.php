@@ -10,7 +10,7 @@ class SectionController extends Controller
 {
     public static function getSections(): JsonResponse
     {
-        $sections = Section::orderByDesc('created_at')->get();
+        $sections = Section::with('subSections')->orderBy('created_at', 'desc')->get();
 
         return response()->json([
             'status' => 200,
@@ -35,10 +35,12 @@ class SectionController extends Controller
             'color' => request('color'),
         ]);
 
+        $newSectionData = Section::where('id', $newSection->id)->with('subsections')->first();
+
         return response()->json([
             'status' => 201,
             'message' => 'Section successfully created',
-            'section' => $newSection,
+            'section' => $newSectionData,
         ], 201);
     }
 
@@ -59,7 +61,7 @@ class SectionController extends Controller
             'color' => request('color'),
         ]);
 
-        $editedSection = Section::find(request('id'));
+        $editedSection = Section::with('subSections')->find(request('id'));
 
         return response()->json([
             'status' => 201,

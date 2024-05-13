@@ -10,41 +10,41 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create base sub-section categories
-        SubSectionCategory::factory()->create([
+        SubSectionCategory::create([
             'name' => 'Living Room',
-            'image_path' => '/storage/categories/livingroom.jpg',
+            'image_path' => '/storage/public/categories/livingroom.jpg',
         ]);
-        SubSectionCategory::factory()->create([
+        SubSectionCategory::create([
             'name' => 'Bathroom',
-            'image_path' => '/storage/categories/bathroom.jpg',
+            'image_path' => '/storage/public/categories/bathroom.jpg',
         ]);
-        SubSectionCategory::factory()->create([
+        SubSectionCategory::create([
             'name' => 'Bedroom',
-            'image_path' => '/storage/categories/bedroom.jpg',
+            'image_path' => '/storage/public/categories/bedroom.jpg',
         ]);
-        SubSectionCategory::factory()->create([
+        SubSectionCategory::create([
             'name' => 'Pantry',
-            'image_path' => '/storage/categories/pantry.jpg',
+            'image_path' => '/storage/public/categories/pantry.jpg',
         ]);
-        SubSectionCategory::factory()->create([
+        SubSectionCategory::create([
             'name' => 'Kitchen',
-            'image_path' => '/storage/categories/kitchen.jpg',
+            'image_path' => '/storage/public/categories/kitchen.jpg',
         ]);
-        SubSectionCategory::factory()->create([
+        SubSectionCategory::create([
             'name' => 'Garage',
-            'image_path' => '/storage/categories/garage.jpg',
+            'image_path' => '/storage/public/categories/garage.jpg',
         ]);
-        SubSectionCategory::factory()->create([
+        SubSectionCategory::create([
             'name' => 'Storage',
-            'image_path' => '/storage/categories/storage.jpg',
+            'image_path' => '/storage/public/categories/storage.jpg',
         ]);
-        SubSectionCategory::factory()->create([
+        SubSectionCategory::create([
             'name' => 'Dining room',
-            'image_path' => '/storage/categories/diningroom.jpg',
+            'image_path' => '/storage/public/categories/diningroom.jpg',
         ]);
-        SubSectionCategory::factory()->create([
+        SubSectionCategory::create([
             'name' => 'Office',
-            'image_path' => '/storage/categories/office.jpg',
+            'image_path' => '/storage/public/categories/office.jpg',
         ]);
     }
 }
