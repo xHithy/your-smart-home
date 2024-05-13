@@ -15,7 +15,7 @@ const ColorInput = ({ title, value, onValueChange, error }: Props) => {
       >
          <span className='text-sm text-gray-600'>{title}</span>
          <input
-            className={`h-12 w-12 rounded-md border-2 p-2 ${
+            className={`h-12 w-12 cursor-pointer rounded-md border-2 p-2 ${
                error && error.length > 0 ? 'border-red-600' : undefined
             }`}
             type='color'
