@@ -12,9 +12,10 @@ return new class () extends Migration {
             $table->string('name');
             $table->unsignedBigInteger('section_id');
             $table->unsignedBigInteger('category_id');
+            $table->timestamps();
+
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('sub_section_categories')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 

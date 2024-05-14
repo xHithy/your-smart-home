@@ -16,6 +16,7 @@ Route::prefix('/v1')->group(function () {
     // Section API calls
     Route::prefix('/section')->group(function () {
         Route::get('/', [SectionController::class, 'getSections']);
+        Route::get('/{id}', [SectionController::class, 'getSingleSection']);
         Route::post('/create', [SectionController::class, 'createSection']);
         Route::post('/edit', [SectionController::class, 'editSection']);
         Route::delete('/delete/{id}', [SectionController::class, 'deleteSection']);
