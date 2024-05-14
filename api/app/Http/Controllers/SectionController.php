@@ -19,6 +19,24 @@ class SectionController extends Controller
         ]);
     }
 
+    public static function getSingleSection($id): JsonResponse
+    {
+        $section = Section::where('id', $id)->with('subSections')->first();
+
+        if(!$section) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Section not found',
+            ]);
+        }
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Section found',
+            'section' => $section
+        ]);
+    }
+
     public static function createSection(): JsonResponse
     {
         $validation = Validator::make(request()->all(), [
@@ -35,7 +53,7 @@ class SectionController extends Controller
             'color' => request('color'),
         ]);
 
-        $newSectionData = Section::where('id', $newSection->id)->with('subsections')->first();
+        $newSectionData = Section::where('id', $newSection->id)->with('subSections')->first();
 
         return response()->json([
             'status' => 201,
