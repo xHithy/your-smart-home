@@ -1,6 +1,6 @@
 import React from 'react';
 import NavigationIcon from './NavigationIcon';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 interface Props {
    name: string;
@@ -9,9 +9,12 @@ interface Props {
 }
 
 const NavigationItem = ({ name, route, icon }: Props) => {
-   const currentRoute = window.location.pathname;
+   const location = useLocation();
+   const currentRoute = location.pathname;
 
-   const isActive = currentRoute === route;
+   // Create a regex pattern to match the base route and its wildcard sub-routes
+   const routePattern = new RegExp(`^${route}(\/.*)?$`);
+   const isActive = routePattern.test(currentRoute);
 
    if (isActive) {
       return (
