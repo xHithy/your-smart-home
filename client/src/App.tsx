@@ -7,7 +7,10 @@ import House from './views/House/House';
 import './websockets/connection';
 import DataProvider from './providers/DataProvider';
 import { MessageProvider } from './providers/MessageContext';
+import Room from './views/Room/Room';
 import MessageContainer from './components/Message/MessageContainer';
+import Settings from './views/Settings/Settings';
+import ConnectionProvider from './providers/ConnectionProvider';
 
 const App = () => {
    return (
@@ -21,10 +24,26 @@ const App = () => {
                <Route
                   path='/house'
                   element={
-                     <DataProvider>
-                        <House />
-                     </DataProvider>
+                     <ConnectionProvider>
+                        <DataProvider>
+                           <House />
+                        </DataProvider>
+                     </ConnectionProvider>
                   }
+               />
+               <Route
+                  path='/house/:section_id'
+                  element={
+                     <ConnectionProvider>
+                        <DataProvider>
+                           <Room />
+                        </DataProvider>
+                     </ConnectionProvider>
+                  }
+               />
+               <Route
+                  path='/settings'
+                  element={<Settings />}
                />
             </Routes>
          </Router>
