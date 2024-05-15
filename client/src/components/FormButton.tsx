@@ -3,7 +3,7 @@ import React from 'react';
 interface Props {
    title: string;
    warning?: boolean;
-   onSubmit: () => void;
+   onSubmit: (e: any) => void;
 }
 
 const FormButton = ({ title, onSubmit, warning = false }: Props) => {
