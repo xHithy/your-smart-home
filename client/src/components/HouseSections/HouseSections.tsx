@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { DataContext } from '../../providers/DataProvider';
 import LoadingSkeleton from './LoadingSkeleton';
 import SingleSection from './SingleSection';
+import { Section } from '../../models/sectionModel';
 
 const HouseSections = () => {
    const { sections, setSections, sectionDataLoading } =
@@ -28,11 +29,12 @@ const HouseSections = () => {
             </div>
          ) : (
             <div className='flex flex-col'>
-               {sections.map((section, index) => (
+               {sections.map((section: Section, index) => (
                   <SingleSection
                      key={index}
                      name={section.name}
                      color={section.color}
+                     subsectionCount={section.sub_sections.length}
                      id={section.id}
                   />
                ))}
