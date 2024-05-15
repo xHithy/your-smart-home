@@ -1,8 +1,11 @@
 import React from 'react';
+import { Category, Section } from './sectionModel';
 
 export interface DataContextModel {
-   sections: any[];
-   setSections: React.Dispatch<React.SetStateAction<any[]>>;
+   sections: Section[] | [];
+   categories: Category[] | [];
    sectionDataLoading: boolean;
+   setSections: React.Dispatch<React.SetStateAction<Section[]>>;
+   setCategories: React.Dispatch<React.SetStateAction<Category[]>>;
    setSectionDataLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }

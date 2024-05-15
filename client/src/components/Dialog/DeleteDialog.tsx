@@ -5,8 +5,8 @@ import { TbX } from 'react-icons/tb';
 interface Props {
    title: string;
    text: string;
-   onDelete: () => void;
-   onCancel: () => void;
+   onDelete: (e: any) => void;
+   onCancel: (e: any) => void;
 }
 
 const DeleteDialog = ({ title, text, onDelete, onCancel }: Props) => {
