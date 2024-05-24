@@ -5,8 +5,9 @@ interface Props {
    placeholder?: string;
    value: string;
    maxWidth?: number;
-   onValueChange: (arg0: string) => void;
    error?: string[];
+   isPassword?: boolean;
+   onValueChange: (arg0: string) => void;
 }
 
 const InputField = ({
@@ -14,8 +15,9 @@ const InputField = ({
    placeholder,
    value,
    maxWidth,
-   onValueChange,
    error,
+   isPassword,
+   onValueChange,
 }: Props) => {
    return (
       <label
@@ -32,6 +34,7 @@ const InputField = ({
             name={title}
             value={value}
             onChange={(e) => onValueChange(e.target.value)}
+            type={isPassword ? 'password' : 'text'}
          />
          {error && error.length > 0 && (
             <span className='text-xs text-red-600'>{error[0]}</span>
