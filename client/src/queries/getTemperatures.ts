@@ -1,28 +1,29 @@
 import axios, { AxiosError } from 'axios';
-import React from 'react';
 import { API_RESPONSE } from './responses';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export const getSections = async (setData: React.Dispatch<any>) => {
+export const getTemperatures = async (room_id: number, interval: string) => {
    try {
-      const query = await axios.get(`${API_URL}/section`, {
-         headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
-         },
-      });
+      const query = await axios.get(
+         `${API_URL}/subsection/temperature/${room_id}?type=${interval}`,
+         {
+            headers: {
+               'Content-Type': 'application/json',
+               Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+            },
+         }
+      );
 
       if (query.data.status === 200 || query.data.status === 201) {
-         setData(query.data.sections);
          return {
             type: API_RESPONSE.SUCCESS,
-            data: query.data.sections,
+            data: query.data.temperatures,
          };
       } else {
          return {
             type: API_RESPONSE.API_ERROR,
-            data: query.data.errors,
+            data: query.data.message,
          };
       }
    } catch (e) {

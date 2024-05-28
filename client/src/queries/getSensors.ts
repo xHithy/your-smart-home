@@ -1,12 +1,20 @@
 import axios, { AxiosError } from 'axios';
-import React from 'react';
 import { API_RESPONSE } from './responses';
+import { Sensor } from '../models/sensorModel';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export const getSections = async (setData: React.Dispatch<any>) => {
+export interface GET_SENSORS_RESPONSE {
+   type:
+      | API_RESPONSE.SUCCESS
+      | API_RESPONSE.API_ERROR
+      | API_RESPONSE.GENERIC_ERROR;
+   data: Sensor[];
+}
+
+export const getSensors = async () => {
    try {
-      const query = await axios.get(`${API_URL}/section`, {
+      const query = await axios.get(`${API_URL}/sensor`, {
          headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
@@ -14,10 +22,9 @@ export const getSections = async (setData: React.Dispatch<any>) => {
       });
 
       if (query.data.status === 200 || query.data.status === 201) {
-         setData(query.data.sections);
          return {
             type: API_RESPONSE.SUCCESS,
-            data: query.data.sections,
+            data: query.data.sensors,
          };
       } else {
          return {

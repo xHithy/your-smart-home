@@ -9,7 +9,12 @@ export const getSingleSection = async (
    id: number
 ) => {
    try {
-      const query = await axios.get(`${API_URL}/section/${id}`);
+      const query = await axios.get(`${API_URL}/section/${id}`, {
+         headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+         },
+      });
 
       if (query.data.status === 200 || query.data.status === 201) {
          setData(query.data.section);

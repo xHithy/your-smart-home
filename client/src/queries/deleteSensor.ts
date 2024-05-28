@@ -1,12 +1,11 @@
 import axios, { AxiosError } from 'axios';
-import React from 'react';
 import { API_RESPONSE } from './responses';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export const getSections = async (setData: React.Dispatch<any>) => {
+export const deleteSensor = async (sensor_token: string) => {
    try {
-      const query = await axios.get(`${API_URL}/section`, {
+      const query = await axios.delete(`${API_URL}/sensor/${sensor_token}`, {
          headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
@@ -14,10 +13,9 @@ export const getSections = async (setData: React.Dispatch<any>) => {
       });
 
       if (query.data.status === 200 || query.data.status === 201) {
-         setData(query.data.sections);
          return {
             type: API_RESPONSE.SUCCESS,
-            data: query.data.sections,
+            data: query.data.message,
          };
       } else {
          return {
@@ -29,7 +27,7 @@ export const getSections = async (setData: React.Dispatch<any>) => {
       const error = e as AxiosError;
       return {
          type: API_RESPONSE.GENERIC_ERROR,
-         data: error.message,
+         data: error,
       };
    }
 };

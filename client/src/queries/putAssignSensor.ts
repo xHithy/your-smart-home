@@ -1,23 +1,31 @@
 import axios, { AxiosError } from 'axios';
-import React from 'react';
 import { API_RESPONSE } from './responses';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export const getSections = async (setData: React.Dispatch<any>) => {
+export const putAssignSensor = async (sensor_id: number, room_id: number) => {
+   const payload = {
+      id: sensor_id,
+      sub_section_id: room_id,
+   };
+
    try {
-      const query = await axios.get(`${API_URL}/section`, {
-         headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
-         },
-      });
+      const query = await axios.put(
+         `${API_URL}/sensor/edit`,
+         JSON.stringify(payload),
+         {
+            method: 'PUT',
+            headers: {
+               'Content-Type': 'application/json',
+               Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+            },
+         }
+      );
 
       if (query.data.status === 200 || query.data.status === 201) {
-         setData(query.data.sections);
          return {
             type: API_RESPONSE.SUCCESS,
-            data: query.data.sections,
+            data: query.data.sensor,
          };
       } else {
          return {

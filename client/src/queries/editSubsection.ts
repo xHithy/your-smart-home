@@ -1,28 +1,25 @@
-import React from 'react';
 import axios, { AxiosError } from 'axios';
-import { Section } from '../models/sectionModel';
 import { API_RESPONSE } from './responses';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export const editSection = async (
-   sections: Section[],
-   name: string,
-   color: string,
-   setData: React.Dispatch<any>,
-   id: number
+export const editSubsection = async (
+   id: number,
+   sectionName: string,
+   categoryId: number | undefined
 ) => {
-   try {
-      const payload = {
-         id: id,
-         name: name,
-         color: color,
-      };
+   const payload = {
+      id: id,
+      name: sectionName,
+      category_id: categoryId,
+   };
 
-      const query = await axios.post(
-         `${API_URL}/section/edit/`,
+   try {
+      const query = await axios.put(
+         `${API_URL}/subsection/edit`,
          JSON.stringify(payload),
          {
+            method: 'PUT',
             headers: {
                'Content-Type': 'application/json',
                Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
@@ -31,14 +28,6 @@ export const editSection = async (
       );
 
       if (query.data.status === 200 || query.data.status === 201) {
-         // Remove the old section data
-         const withoutOldSection = sections.filter(
-            (section) => section.id !== id
-         );
-
-         const data = query.data.section;
-         setData([data, ...withoutOldSection]);
-
          return {
             type: API_RESPONSE.SUCCESS,
             data: query.data.message,
@@ -51,9 +40,10 @@ export const editSection = async (
       }
    } catch (e) {
       const error = e as AxiosError;
+      console.log(e);
       return {
          type: API_RESPONSE.GENERIC_ERROR,
-         data: error,
+         data: error.message,
       };
    }
 };
