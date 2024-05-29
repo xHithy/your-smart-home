@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Broadcast;
 
-Broadcast::channel('temperature-channel', function () {
+Broadcast::channel('main-data-channel', function () {
+    return true;
+});
+
+Broadcast::channel('room-data-channel-{room_id}', function () {
     return true;
 });
 
