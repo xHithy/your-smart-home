@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
-import { Section, SubSection } from '../models/sectionModel';
-import React, { Dispatch, SetStateAction } from 'react';
+import { SubSection } from '../models/sectionModel';
+import { Dispatch, SetStateAction } from 'react';
 import { API_RESPONSE } from './responses';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -29,6 +29,7 @@ export const postSubsection = async (
          {
             headers: {
                'Content-Type': 'application/json',
+               Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
             },
          }
       );
