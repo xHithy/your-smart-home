@@ -7,10 +7,12 @@ import House from './views/House/House';
 import './websockets/connection';
 import DataProvider from './providers/DataProvider';
 import { MessageProvider } from './providers/MessageContext';
-import Room from './views/Room/Room';
 import MessageContainer from './components/Message/MessageContainer';
 import Settings from './views/Settings/Settings';
 import ConnectionProvider from './providers/ConnectionProvider';
+import Rooms from './views/Rooms/Rooms';
+import Login from './views/Login/Login';
+import AuthorizedRoute from './components/AuthorizedRoute';
 
 const App = () => {
    return (
@@ -19,31 +21,51 @@ const App = () => {
             <Routes>
                <Route
                   path='/'
-                  element={<Dashboard />}
+                  element={<Login />}
+               />
+               <Route
+                  path='/dashboard'
+                  element={
+                     <DataProvider>
+                        <Dashboard />
+                     </DataProvider>
+                  }
                />
                <Route
                   path='/house'
                   element={
-                     <ConnectionProvider>
-                        <DataProvider>
-                           <House />
-                        </DataProvider>
-                     </ConnectionProvider>
+                     <AuthorizedRoute>
+                        <ConnectionProvider>
+                           <DataProvider>
+                              <House />
+                           </DataProvider>
+                        </ConnectionProvider>
+                     </AuthorizedRoute>
                   }
                />
                <Route
                   path='/house/:section_id'
                   element={
-                     <ConnectionProvider>
-                        <DataProvider>
-                           <Room />
-                        </DataProvider>
-                     </ConnectionProvider>
+                     <AuthorizedRoute>
+                        <ConnectionProvider>
+                           <DataProvider>
+                              <Rooms />
+                           </DataProvider>
+                        </ConnectionProvider>
+                     </AuthorizedRoute>
                   }
                />
                <Route
                   path='/settings'
-                  element={<Settings />}
+                  element={
+                     <AuthorizedRoute>
+                        <DataProvider>
+                           <ConnectionProvider>
+                              <Settings />
+                           </ConnectionProvider>
+                        </DataProvider>
+                     </AuthorizedRoute>
+                  }
                />
             </Routes>
          </Router>
