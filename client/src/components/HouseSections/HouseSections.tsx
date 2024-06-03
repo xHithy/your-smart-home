@@ -19,7 +19,7 @@ const HouseSections = () => {
    return (
       <div className='flex w-full flex-col'>
          {sections.length === 0 ? (
-            <div className='flex flex-col items-center justify-center py-10'>
+            <div className='flex flex-col items-center justify-center rounded-md bg-gray-200 py-5'>
                <span className='text-xl font-black text-gray-900'>
                   No sections found...
                </span>
@@ -28,7 +28,7 @@ const HouseSections = () => {
                </span>
             </div>
          ) : (
-            <div className='flex flex-col'>
+            <div className='grid grid-cols-1 gap-2 md:grid-cols-2'>
                {sections.map((section: Section, index) => (
                   <SingleSection
                      key={index}

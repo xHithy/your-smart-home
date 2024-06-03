@@ -51,12 +51,12 @@ const EditSectionDialog = ({
                onValueChange={(value) => setSectionName(value)}
                error={errors.name}
             />
-            <ColorInput
-               title='Pick a color'
-               value={sectionColor}
-               onValueChange={(value) => setSectionColor(value)}
-               error={errors.color}
-            />
+            {/*<ColorInput*/}
+            {/*   title='Pick a color'*/}
+            {/*   value={sectionColor}*/}
+            {/*   onValueChange={(value) => setSectionColor(value)}*/}
+            {/*   error={errors.color}*/}
+            {/*/>*/}
             <div className='absolute bottom-0 left-0 flex h-auto w-full flex-row-reverse items-center self-end px-5 py-3 pt-5 md:static md:p-0'>
                <FormButton
                   title='Finish'

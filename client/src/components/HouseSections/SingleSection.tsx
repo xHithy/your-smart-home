@@ -86,8 +86,7 @@ const SingleSection = ({ name, color, id, subsectionCount }: Props) => {
    return (
       <>
          <div
-            style={{ borderLeftColor: color }}
-            className='mb-2 flex w-full cursor-pointer flex-col space-y-1 rounded-r-md border-l-4 bg-gray-200 p-3'
+            className='flex w-full cursor-pointer flex-col space-y-1 rounded-md bg-gray-200 p-3 duration-200 hover:bg-gray-300'
             onClick={() => (window.location.href = `/house/${id}`)}
          >
             <div className='relative flex w-full items-center justify-between space-x-1'>

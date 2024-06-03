@@ -1,41 +1,66 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { DataContext } from '../../providers/DataProvider';
 import { TbX } from 'react-icons/tb';
 import InputField from '../InputField';
-import FormButton from '../FormButton';
-import { PostSubSectionError } from '../../views/Rooms/Rooms';
-import { DataContext } from '../../providers/DataProvider';
 import Select from '../Select';
+import FormButton from '../FormButton';
+import { editSubsection } from '../../queries/editSubsection';
+import { API_RESPONSE } from '../../queries/responses';
+import { MESSAGE_TYPES } from '../../models/messageContextModel';
+import { useMessages } from '../../providers/MessageContext';
 
 interface Props {
-   categoryId: number | undefined;
-   roomName: string;
-   errors: PostSubSectionError;
+   id: number;
+   room: string;
+   categoryId: number;
    onClose: () => void;
-   onSubmit: () => void;
-   setRoomName: (args0: string) => void;
-   setCategoryId: (args0: number) => void;
+   onSuccess: () => void;
 }
 
-const CreateSubsectionDialog = ({
+const EditSubsectionDialog = ({
+   id,
+   room,
    categoryId,
-   roomName,
-   errors,
    onClose,
-   onSubmit,
-   setRoomName,
-   setCategoryId,
+   onSuccess,
 }: Props) => {
    const { categories } = useContext(DataContext);
+   const { addMessage } = useMessages();
+   const [roomName, setRoomName] = useState(room);
+   const [category, setCategory] = useState(categoryId);
+   const [errors, setErrors] = useState({
+      name: [],
+      category_id: [],
+   });
+
+   const queryEditSubSection = async () => {
+      const response = await editSubsection(id, roomName, category);
+
+      if (response.type === API_RESPONSE.SUCCESS) {
+         addMessage(MESSAGE_TYPES.SUCCESS, 'Room successfully edited!');
+         onSuccess();
+
+         setErrors({
+            name: [],
+            category_id: [],
+         });
+         onClose();
+      } else if (response.type === API_RESPONSE.API_ERROR) {
+         setErrors(response.data);
+      } else if (response.type === API_RESPONSE.GENERIC_ERROR) {
+         addMessage(MESSAGE_TYPES.ERROR, response.data);
+      }
+   };
 
    const clearForm = () => {
       setRoomName('');
-      setCategoryId(0);
+      setCategory(0);
    };
 
    return (
       <div className='relative h-screen max-h-screen w-full justify-between bg-gray-100 px-5 py-3 pb-14 shadow-md sm:h-auto sm:max-w-md sm:rounded-md md:pb-3'>
          <div className='flex w-full items-center justify-between pb-2'>
-            <h2 className='text-2xl font-bold text-gray-900'>Create a room</h2>
+            <h2 className='text-2xl font-bold text-gray-900'>Edit room</h2>
             <div
                className='flex h-10 w-10 cursor-pointer items-center justify-center rounded-md text-gray-900 transition-colors duration-200 hover:bg-blue-600 hover:text-gray-200'
                onClick={() => {
@@ -56,8 +81,8 @@ const CreateSubsectionDialog = ({
             />
             <Select
                values={categories}
-               value={categoryId}
-               onValueChange={(value) => setCategoryId(value)}
+               value={category}
+               onValueChange={(value) => setCategory(value)}
                text='Select a category'
                title='Category'
                error={errors.category_id}
@@ -66,7 +91,7 @@ const CreateSubsectionDialog = ({
                <FormButton
                   title='Finish'
                   onSubmit={() => {
-                     onSubmit();
+                     queryEditSubSection();
                      clearForm();
                   }}
                />
@@ -76,4 +101,4 @@ const CreateSubsectionDialog = ({
    );
 };
 
-export default CreateSubsectionDialog;
+export default EditSubsectionDialog;

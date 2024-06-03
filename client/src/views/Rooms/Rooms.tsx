@@ -21,7 +21,7 @@ export interface PostSubSectionError {
    section_id: string[];
 }
 
-const Room = () => {
+const Rooms = () => {
    const section_id = useParams()['section_id'];
    const { addMessage } = useMessages();
 
@@ -90,6 +90,7 @@ const Room = () => {
 
    useEffect(() => {
       queryGetSingleSection();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [section_id]);
 
    return (
@@ -126,7 +127,10 @@ const Room = () => {
                </div>
             </div>
          ) : (
-            <RoomGrid rooms={rooms} />
+            <RoomGrid
+               onRefetch={queryGetSingleSection}
+               rooms={rooms}
+            />
          )}
          {isDialog && (
             <DialogContainer>
@@ -145,4 +149,4 @@ const Room = () => {
    );
 };
 
-export default Room;
+export default Rooms;
