@@ -1,4 +1,10 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, {
+   createContext,
+   useState,
+   useContext,
+   ReactNode,
+   useEffect,
+} from 'react';
 import {
    Message,
    MESSAGE_TYPES,
@@ -17,16 +23,34 @@ interface Props {
 
 export const MessageProvider = ({ children }: Props) => {
    const [messages, setMessages] = useState<Message[]>([]);
+   const messageTimeouts = new Set<number>();
 
-   const addMessage = (type: MESSAGE_TYPES, message: string) => {
+   const addMessage = (
+      type: MESSAGE_TYPES,
+      message: string,
+      token?: string
+   ) => {
       const id = Date.now();
-      setMessages([...messages, { id, type, message }]);
-      setTimeout(() => removeMessage(id), 7000);
+      setMessages((prevMessages) => [
+         ...prevMessages,
+         { id, type, message, token },
+      ]);
+      const timeoutId = window.setTimeout(() => removeMessage(id), 7000);
+      messageTimeouts.add(timeoutId);
    };
 
    const removeMessage = (id: number) => {
-      setMessages(messages.filter((msg) => msg.id !== id));
+      setMessages((prevMessages) =>
+         prevMessages.filter((msg) => msg.id !== id)
+      );
    };
+
+   useEffect(() => {
+      return () => {
+         messageTimeouts.forEach((timeoutId) => clearTimeout(timeoutId));
+         messageTimeouts.clear();
+      };
+   }, []);
 
    return (
       <MessageContext.Provider value={{ messages, addMessage, removeMessage }}>

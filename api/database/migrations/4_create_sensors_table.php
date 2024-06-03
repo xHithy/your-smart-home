@@ -11,7 +11,8 @@ return new class () extends Migration {
             $table->id();
             $table->string('sensor_name');
             $table->string('sensor_token');
-            $table->boolean('authorized');
+            $table->integer('sub_section_id')->default(0);
+            $table->boolean('authorized')->default(false);
             $table->integer('last_auth_attempt');
             $table->integer('last_data_update')->nullable();
         });

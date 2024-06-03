@@ -12,6 +12,7 @@ const MessageContainer = () => {
                key={index}
                message={msg.message}
                type={msg.type}
+               token={msg.token}
                onRemove={() => removeMessage(msg.id)}
             />
          ))}

@@ -10,7 +10,12 @@ export const deleteSection = async (
    id: number
 ) => {
    try {
-      const query = await axios.delete(`${API_URL}/section/delete/${id}`);
+      const query = await axios.delete(`${API_URL}/section/delete/${id}`, {
+         headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+         },
+      });
 
       if (query.data.status === 200 || query.data.status === 201) {
          setData((data: Section[]) => data.filter((item) => item.id !== id));

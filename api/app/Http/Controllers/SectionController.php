@@ -21,7 +21,7 @@ class SectionController extends Controller
 
     public static function getSingleSection($id): JsonResponse
     {
-        $section = Section::where('id', $id)->with('subSections')->first();
+        $section = Section::where('id', $id)->with('subSections.category')->first();
 
         if(!$section) {
             return response()->json([
@@ -33,7 +33,7 @@ class SectionController extends Controller
         return response()->json([
             'status' => 200,
             'message' => 'Section found',
-            'section' => $section
+            'section' => $section,
         ]);
     }
 

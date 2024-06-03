@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { TbEdit, TbTrashX, TbX } from 'react-icons/tb';
+import {
+   TbCpuOff,
+   TbEdit,
+   TbPin,
+   TbPinnedOff,
+   TbTrashX,
+   TbX,
+} from 'react-icons/tb';
 import DialogContainer from '../Dialog/DialogContainer';
 import DeleteDialog from '../Dialog/DeleteDialog';
 
@@ -7,11 +14,25 @@ interface Props {
    onDelete?: (e: any) => void;
    onEdit?: (e: any) => void;
    onClose: (e: any) => void;
+   onUnassign?: (e: any) => void;
+   onPin?: (e: any) => void;
+   onUnpin?: (e: any) => void;
+   deleteText?: string;
    top?: number;
    right?: number;
 }
 
-const OptionDialog = ({ onDelete, onEdit, onClose, top, right }: Props) => {
+const OptionDialog = ({
+   onDelete,
+   onEdit,
+   onClose,
+   onUnassign,
+   onPin,
+   onUnpin,
+   top,
+   right,
+   deleteText,
+}: Props) => {
    const [deleteDialog, setDeleteDialog] = useState(false);
 
    return (
@@ -23,7 +44,7 @@ const OptionDialog = ({ onDelete, onEdit, onClose, top, right }: Props) => {
             className='absolute right-1.5 top-1.5 h-5 w-5 cursor-pointer rounded-md text-xl transition-colors duration-200 hover:bg-blue-600 hover:text-gray-200'
             onClick={onClose}
          />
-         {onDelete && (
+         {onDelete && !onUnassign && (
             <div
                onClick={(e) => {
                   e.stopPropagation();
@@ -42,11 +63,48 @@ const OptionDialog = ({ onDelete, onEdit, onClose, top, right }: Props) => {
                <TbEdit /> <span>Edit</span>
             </div>
          )}
+         {onUnassign && (
+            <div
+               onClick={onUnassign}
+               className='flex cursor-pointer items-center space-x-1 rounded-md px-3 py-1 transition-colors duration-200 hover:bg-gray-300'
+            >
+               <TbCpuOff />
+               <span>Unassign</span>
+            </div>
+         )}
+         {onPin && (
+            <div
+               onClick={(e) => {
+                  onPin(e);
+                  e.stopPropagation();
+               }}
+               className='flex cursor-pointer items-center space-x-1 rounded-md px-3 py-1 transition-colors duration-200 hover:bg-gray-300'
+            >
+               <TbPin />
+               <span>Pin</span>
+            </div>
+         )}
+         {onUnpin && (
+            <div
+               onClick={(e) => {
+                  onUnpin(e);
+                  e.stopPropagation();
+               }}
+               className='flex cursor-pointer items-center space-x-1 rounded-md px-3 py-1 transition-colors duration-200 hover:bg-gray-300'
+            >
+               <TbPinnedOff />
+               <span>Unpin</span>
+            </div>
+         )}
          {deleteDialog && onDelete && (
-            <DialogContainer>
+            <DialogContainer leaveHorizontalPadding>
                <DeleteDialog
                   title='Confirm deletion'
-                  text='Are you sure you want to delete this section? By deleting this section you will delete all rooms under this section.'
+                  text={
+                     deleteText
+                        ? deleteText
+                        : 'Are you sure you want to delete this section? By deleting this section you will delete all rooms under this section.'
+                  }
                   onDelete={onDelete}
                   onCancel={(e) => {
                      e.stopPropagation();

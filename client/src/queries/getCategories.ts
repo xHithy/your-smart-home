@@ -6,7 +6,12 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 export const getCategories = async (setData: React.Dispatch<any>) => {
    try {
-      const query = await axios.get(`${API_URL}/subsection/categories`);
+      const query = await axios.get(`${API_URL}/subsection/categories`, {
+         headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+         },
+      });
 
       if (query.data.status === 200 || query.data.status === 201) {
          setData(query.data.categories);

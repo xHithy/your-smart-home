@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { TbX } from 'react-icons/tb';
 import InputField from '../InputField';
 import FormButton from '../FormButton';
-import { PostSubSectionError } from '../../views/Room/Room';
+import { PostSubSectionError } from '../../views/Rooms/Rooms';
 import { DataContext } from '../../providers/DataProvider';
 import Select from '../Select';
 

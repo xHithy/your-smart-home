@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * App\Models\SubSection
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|SubSection whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SubSection whereSectionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SubSection whereUpdatedAt($value)
+ * @property-read \App\Models\SubSectionCategory|null $category
  * @mixin Eloquent
  */
 class SubSection extends Model
@@ -34,5 +36,16 @@ class SubSection extends Model
         'name',
         'section_id',
         'category_id',
+        'pinned',
     ];
+
+    public function category(): HasOne
+    {
+        return $this->hasOne(SubSectionCategory::class, 'id', 'category_id');
+    }
+
+    public function section(): HasOne
+    {
+        return $this->hasOne(Section::class, 'id', 'section_id');
+    }
 }

@@ -25,11 +25,10 @@ export const editSection = async (
          {
             headers: {
                'Content-Type': 'application/json',
+               Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
             },
          }
       );
-
-      console.log(query);
 
       if (query.data.status === 200 || query.data.status === 201) {
          // Remove the old section data
