@@ -39,6 +39,13 @@ class SubSection extends Model
         'pinned',
     ];
 
+    protected $casts = [
+        'id' => 'integer',
+        'section_id' => 'integer',
+        'category_id' => 'integer',
+        'pinned' => 'boolean',
+    ];
+
     public function category(): HasOne
     {
         return $this->hasOne(SubSectionCategory::class, 'id', 'category_id');

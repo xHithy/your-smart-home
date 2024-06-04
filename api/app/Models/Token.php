@@ -19,6 +19,12 @@ class Token extends Model
 
     public $timestamps = false;
 
+    protected $casts = [
+        'id' => 'integer',
+        'user_id' => 'integer',
+        'last_used' => 'integer',
+    ];
+
     protected $fillable = [
         'token',
         'user_id',

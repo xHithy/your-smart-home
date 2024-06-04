@@ -31,4 +31,10 @@ class SubSectionCategory extends Model
         'name',
         'image_path',
     ];
+
+    protected $casts = [
+        'id' => 'integer',
+        'name' => 'string',
+        'image_path' => 'string',
+    ];
 }

@@ -35,6 +35,12 @@ class Section extends Model
         'color',
     ];
 
+    protected $casts = [
+        'id' => 'integer',
+        'name' => 'string',
+        'color' => 'string',
+    ];
+
     public function subSections(): HasMany
     {
         return $this->hasMany(SubSection::class, 'section_id', 'id');

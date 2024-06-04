@@ -20,7 +20,7 @@ export const editSection = async (
       };
 
       const query = await axios.post(
-         `${API_URL}/section/edit/`,
+         `${API_URL}/section/edit`,
          JSON.stringify(payload),
          {
             headers: {

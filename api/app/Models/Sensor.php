@@ -34,6 +34,14 @@ class Sensor extends Model
 
     public $timestamps = false;
 
+    protected $casts = [
+        'id' => 'integer',
+        'sub_section_id' => 'integer',
+        'authorized' => 'boolean',
+        'last_auth_attempt' => 'integer',
+        'last_data_update' => 'integer',
+    ];
+
     protected $fillable = [
         'sensor_name',
         'sensor_token',
