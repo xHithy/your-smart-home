@@ -13,7 +13,7 @@ window.Pusher = Pusher;
 
 const pusher = new Pusher('12345', {
    cluster: 'mt1',
-   wsHost: 'localhost',
+   wsHost: 'api.kantanudarznieciba.lv',
    wsPort: 6001,
    forceTLS: false,
    enabledTransports: ['ws'],

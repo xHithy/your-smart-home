@@ -27,6 +27,13 @@ class Humidity extends Model
 
     public $timestamps = false;
 
+    protected $casts = [
+        'id' => 'integer',
+        'sub_section_id' => 'integer',
+        'value' => 'float',
+        'timestamp' => 'integer',
+    ];
+
     protected $fillable = [
         'sub_section_id',
         'value',

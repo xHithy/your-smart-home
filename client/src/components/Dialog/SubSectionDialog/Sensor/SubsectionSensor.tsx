@@ -49,6 +49,7 @@ const SubsectionSensor = ({ room_id }: Props) => {
 
       if (response.type === API_RESPONSE.SUCCESS) {
          setUnassignedSensors(response.data);
+         console.log(response.data);
       } else {
          addMessage(MESSAGE_TYPES.ERROR, 'Failed to fetch unassigned sensors');
       }
@@ -123,9 +124,6 @@ const SubsectionSensor = ({ room_id }: Props) => {
 
    useEffect(() => {
       queryGetSensor();
-   }, []);
-
-   useEffect(() => {
       queryGetUnassignedSensors();
    }, []);
 

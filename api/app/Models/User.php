@@ -20,6 +20,12 @@ class User extends Model
 
     public $timestamps = false;
 
+    protected $casts = [
+        'id' => 'integer',
+        'username' => 'string',
+        'password' => 'string',
+    ];
+
     protected $fillable = [
         'username',
         'password',

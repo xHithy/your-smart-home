@@ -25,7 +25,7 @@ class SensorController extends Controller
          */
         $sensors = Sensor::get();
         foreach ($sensors as $sensor) {
-            if($sensor->authorized === 0) {
+            if(!$sensor->authorized) {
                 $last_attempt = $sensor->last_auth_attempt;
                 $current_time = time();
 
@@ -45,7 +45,7 @@ class SensorController extends Controller
 
     public function getUnassignedSensors(): JsonResponse
     {
-        $unassignedSensors = Sensor::where('sub_section_id', '=', 0)->get();
+        $unassignedSensors = Sensor::where('sub_section_id', '=', 0)->where('authorized', '=', true)->get();
 
         return response()->json([
             'status' => 200,
