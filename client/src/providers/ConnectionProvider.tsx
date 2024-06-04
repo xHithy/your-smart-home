@@ -31,8 +31,6 @@ const ConnectionProvider = ({ children }: Props) => {
       if (response.type === API_RESPONSE.SUCCESS) {
          setSensors(response.data);
 
-         console.log(response.data);
-
          // Set unauthorized sensors
          const unauthorizedSensors = response.data.filter(
             (sensor) => !sensor.authorized
@@ -42,8 +40,6 @@ const ConnectionProvider = ({ children }: Props) => {
          const authorizedSensors = response.data.filter(
             (sensor) => sensor.authorized
          );
-
-         console.log(authorizedSensors);
 
          // Sort the authorized sensors by id in descending order
          authorizedSensors.sort((a, b) => b.id - a.id);

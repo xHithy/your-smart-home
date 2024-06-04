@@ -1,16 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { DataContext } from '../../providers/DataProvider';
 import LoadingSkeleton from './LoadingSkeleton';
 import SingleSection from './SingleSection';
 import { Section } from '../../models/sectionModel';
 
 const HouseSections = () => {
-   const { sections, setSections, sectionDataLoading } =
-      useContext(DataContext);
-
-   useEffect(() => {
-      console.log(sections);
-   }, [sections, setSections]);
+   const { sections, sectionDataLoading } = useContext(DataContext);
 
    if (sectionDataLoading) {
       return <LoadingSkeleton />;
