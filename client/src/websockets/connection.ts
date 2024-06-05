@@ -15,8 +15,10 @@ const pusher = new Pusher('12345', {
    cluster: 'mt1',
    wsHost: 'api.kantanudarznieciba.lv',
    wsPort: 6001,
-   forceTLS: false,
-   enabledTransports: ['ws'],
+   wssPort: 6001,
+   forceTLS: true,
+   enabledTransports: ['ws', 'wss'],
+   disableStats: true,
 });
 
 window.Client = pusher;
