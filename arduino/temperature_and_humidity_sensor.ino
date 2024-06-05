@@ -1,6 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
-#include <WiFiClient.h>
+#include <WiFiClientSecure.h>
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
 #include <DHT_U.h>
@@ -18,14 +18,14 @@ String generateToken();
 bool authorized = false;
 const String token = generateToken();
 const String sensor_name = "Temperature And Humidity sensor #1";
-const String serverName = "http://192.168.250.15/api/v1/sensor/handshake";
-const String dataServerName = "http://192.168.250.15/api/v1/sensor/data";
+const String serverName = "https://api.kantanudarznieciba.lv/api/v1/sensor/handshake";
+const String dataServerName = "https://api.kantanudarznieciba.lv/api/v1/sensor/data";
 
 // Timing variables
 unsigned long previousConnectionMillis = 0;
 unsigned long previousDataMillis = 0;
 const long connectionInterval = 5000; // 5 seconds interval
-const long dataInterval = 5000; // 30 seconds interval
+const long dataInterval = 30000; // 30 seconds interval
 
 void setup() {
   Serial.begin(115200);
@@ -56,9 +56,10 @@ void loop() {
 
 void connectionAttempt() {
   if (WiFi.status() == WL_CONNECTED) {
-    WiFiClient client;
+    WiFiClientSecure client;
     HTTPClient http;
 
+    client.setInsecure();  // Disable SSL certificate verification
     http.setFollowRedirects(HTTPC_FORCE_FOLLOW_REDIRECTS);
     http.begin(client, serverName);
 
@@ -91,9 +92,10 @@ void connectionAttempt() {
 
 void sendData() {
   if (WiFi.status() == WL_CONNECTED) {
-    WiFiClient client;
+    WiFiClientSecure client;
     HTTPClient http;
 
+    client.setInsecure();  // Disable SSL certificate verification
     http.begin(client, dataServerName);
 
     sensors_event_t temperatureEvent, humidityEvent;

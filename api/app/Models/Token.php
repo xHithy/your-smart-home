@@ -11,6 +11,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Token newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Token newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Token query()
+ * @property int $id
+ * @property string $token
+ * @property int $user_id
+ * @property int $last_used
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereLastUsed($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereUserId($value)
  * @mixin \Eloquent
  */
 class Token extends Model

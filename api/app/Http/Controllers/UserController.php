@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ActionLogEvent;
+use App\Models\Log;
 use App\Models\Token;
 use App\Models\User;
 use Hash;
@@ -41,6 +43,8 @@ class UserController extends Controller
             'last_used' => time(),
         ]);
 
+        self::createLog('A user has logged in');
+
         return response()->json([
             'status' => 200,
             'message' => 'Logged in successfully',
@@ -54,6 +58,8 @@ class UserController extends Controller
         $token = request()->bearerToken();
 
         Token::where('token', $token)->delete();
+
+        self::createLog('A user has logged out');
 
         return response()->json([
             'status' => 200,

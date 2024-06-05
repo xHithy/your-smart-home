@@ -13,6 +13,7 @@ import ConnectionProvider from './providers/ConnectionProvider';
 import Rooms from './views/Rooms/Rooms';
 import Login from './views/Login/Login';
 import AuthorizedRoute from './components/AuthorizedRoute';
+import NotFound from './views/NotFound';
 
 const App = () => {
    return (
@@ -68,6 +69,10 @@ const App = () => {
                         </DataProvider>
                      </AuthorizedRoute>
                   }
+               />
+               <Route
+                  path='*'
+                  element={<NotFound />}
                />
             </Routes>
          </Router>

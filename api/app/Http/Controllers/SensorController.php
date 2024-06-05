@@ -64,7 +64,10 @@ class SensorController extends Controller
             return self::incorrectPayloadFormatResponse($validation->errors());
         }
 
+        $sensor = Sensor::where('sensor_token', $sensor_token)->first();
         Sensor::where('sensor_token', $sensor_token)->delete();
+
+        self::createLog('The sensor ('.$sensor->sensor_name.') has been deleted');
 
         return response()->json([
             'status' => 200,
@@ -208,6 +211,7 @@ class SensorController extends Controller
             ]);
 
             broadcast(new SensorConnectionAttemptEvent($newSensor));
+            self::createLog($newSensor->sensor_name . ' has started an authorization request');
 
             return response()->json([
                 'status' => 201,
@@ -254,6 +258,8 @@ class SensorController extends Controller
             'authorized' => true,
             'last_data_update' => time(),
         ]);
+
+        self::createLog($authorizedSensor->sensor_name . ' has been authorized');
 
         return response()->json([
             'status' => 201,

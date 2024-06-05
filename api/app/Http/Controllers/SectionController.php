@@ -55,6 +55,8 @@ class SectionController extends Controller
 
         $newSectionData = Section::where('id', $newSection->id)->with('subSections')->first();
 
+        self::createLog('A new section ('.$newSection->name.') has been created');
+
         return response()->json([
             'status' => 201,
             'message' => 'Section successfully created',
@@ -74,12 +76,16 @@ class SectionController extends Controller
             return self::incorrectPayloadFormatResponse($validation->errors());
         }
 
+        $section = Section::where('id', request('id'))->first();
+
         Section::where('id', request('id'))->update([
             'name' => request('name'),
             'color' => request('color'),
         ]);
 
-        $editedSection = Section::with('subSections')->find(request('id'));
+        $editedSection = Section::where('id', request('id'))->with('subSections')->first();
+
+        self::createLog('The section ('.$section->name.') has been updated to ('.$editedSection->name.')');
 
         return response()->json([
             'status' => 201,
@@ -98,7 +104,11 @@ class SectionController extends Controller
             return self::incorrectPayloadFormatResponse($validation->errors());
         }
 
+        $section = Section::where('id', $id)->first();
+
         Section::where('id', $id)->delete();
+
+        self::createLog('The section ('.$section->name.') has been deleted');
 
         return response()->json([
             'status' => 200,
