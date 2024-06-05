@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Broadcast;
 
+Broadcast::channel('logs-channel', function () {
+    return true;
+});
+
 Broadcast::channel('main-data-channel', function () {
     return true;
 });

@@ -46,6 +46,8 @@ class SubSectionController extends Controller
 
         $newSubsectionWithCategory = SubSection::where('id', $newSubsection->id)->with('category')->first();
 
+        self::createLog('A new subsection ('.$newSubsection->name.') has been created');
+
         return response()->json([
             'status' => 201,
             'message' => 'Subsection successfully created',

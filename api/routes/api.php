@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SensorController;
+use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\SubSectionCategoryController;
 use App\Http\Controllers\SubSectionController;
 use App\Http\Controllers\UserController;
@@ -51,4 +52,10 @@ Route::prefix('/v1')->group(function () {
         Route::post('/logout', [UserController::class, 'logout']);
         Route::post('/ping-token', [UserController::class, 'pingToken'])->middleware(TokenVerification::class);
     });
+
+    // Dashboard statistics
+    Route::get('/statistics', [StatisticsController::class, 'getStatistics']);
+
+    // Backend logs
+    Route::get('/logs', [StatisticsController::class, 'getLogs']);
 });

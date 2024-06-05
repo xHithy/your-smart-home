@@ -5,6 +5,7 @@ import PageTitle from '../../components/PageTitle';
 import Sensors from './Sensors/Sensors';
 import Logout from './Account/Logout';
 import Data from './Data/Data';
+import Logs from './Data/Logs';
 
 const Settings = () => {
    return (
@@ -20,7 +21,10 @@ const Settings = () => {
             </div>
             <div className='flex flex-col'>
                <h2 className='font-semibold text-gray-500'>Data</h2>
-               <Data />
+               <div className='flex space-x-3'>
+                  <Data />
+                  <Logs />
+               </div>
             </div>
             <div className='flex flex-col'>
                <h2 className='font-semibold text-gray-500'>Account</h2>

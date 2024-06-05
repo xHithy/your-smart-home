@@ -26,6 +26,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method static \Illuminate\Database\Eloquent\Builder|SubSection whereSectionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SubSection whereUpdatedAt($value)
  * @property-read \App\Models\SubSectionCategory|null $category
+ * @property bool $pinned
+ * @property-read \App\Models\Section|null $section
+ * @method static \Illuminate\Database\Eloquent\Builder|SubSection wherePinned($value)
  * @mixin Eloquent
  */
 class SubSection extends Model
