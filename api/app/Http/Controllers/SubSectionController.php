@@ -90,6 +90,16 @@ class SubSectionController extends Controller
         }
 
         SubSection::where('id', $id)->delete();
+        Temperature::where('sub_section_id', $id)->delete();
+        Humidity::where('sub_section_id', $id)->delete();
+
+        // Check if a sensor is connected to the room
+        $sensorExists = Sensor::where('sub_section_id', $id)->exists();
+        if($sensorExists) {
+            Sensor::where('sub_section_id', $id)->update([
+                'sub_section_id' => 0,
+            ]);
+        }
 
         return response()->json([
             'status' => 200,
