@@ -21,7 +21,7 @@ const StatsRowItem = ({ title, value, timestamp }: StatsRowItemProps) => {
    };
 
    return (
-      <div className='flex flex-col items-center justify-center rounded-md bg-gray-200 p-3'>
+      <div className='flex h-[92px] flex-col items-center justify-center rounded-md bg-gray-200 p-3'>
          <span className='text-center text-sm text-gray-500'>{title}</span>
          <span className='text-center text-2xl font-black text-gray-900'>
             {value}
