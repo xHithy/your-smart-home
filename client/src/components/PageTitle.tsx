@@ -13,7 +13,7 @@ const PageTitle = ({ title, breadcrumbs }: Props) => {
             {breadcrumbs ? (
                <>
                   <span
-                     className='flex cursor-pointer items-center space-x-1 rounded-md bg-gray-300 p-2 text-lg font-semibold'
+                     className='flex cursor-pointer items-center space-x-1 rounded-md bg-gray-200 p-2 text-lg font-semibold duration-200 hover:bg-gray-300'
                      onClick={() => (window.location.href = '/house')}
                   >
                      <TbArrowLeft className='text-2xl' />
