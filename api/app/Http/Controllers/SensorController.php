@@ -79,9 +79,8 @@ class SensorController extends Controller
     {
         $validation = Validator::make(request()->all(), [
             'id' => 'required|exists:sensors,id',
-            'sensor_name' => 'nullable|string|min:2|max:55',
+            'sensor_name' => 'string|min:2|max:55',
             'sub_section_id' => [
-                'required',
                 'integer',
                 function ($attribute, $value, $fail) {
                     if ($value !== 0 && !DB::table('sub_sections')->where('id', $value)->exists()) {
@@ -95,25 +94,24 @@ class SensorController extends Controller
             return self::incorrectPayloadFormatResponse($validation->errors());
         }
 
-        // If it's a sensor assignment to a subsection
-        if (request('sub_section_id') >= 0) {
+        if(!request('sensor_name')) {
             Sensor::where('id', request('id'))->update([
                 'sub_section_id' => request('sub_section_id'),
             ]);
-
-            $sensor = Sensor::where('id', request('id'))->first();
-
-            return response()->json([
-                'status' => 201,
-                'message' => 'Sensor has been assigned to a subsection successfully',
-                'sensor' => $sensor,
-            ], 201);
+        } else {
+            Sensor::where('id', request('id'))->update([
+                'sensor_name' => request('sensor_name'),
+                'sub_section_id' => request('sub_section_id'),
+            ]);
         }
 
-        // If it's a sensor name change
+        $updatedSensor = Sensor::where('id', request('id'))->first();
+
         return response()->json([
-            'test',
-        ]);
+            'status' => 201,
+            'message' => 'Sensor updated successfully',
+            'sensor' => $updatedSensor,
+        ], 201);
     }
 
     public static function sendData(): JsonResponse

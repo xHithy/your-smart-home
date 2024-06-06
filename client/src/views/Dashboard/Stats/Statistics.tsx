@@ -50,17 +50,17 @@ const StatsRow = ({ title, stats, valueType }: StatsRowProps) => {
          </div>
          <div className='grid grid-cols-2 gap-2 md:grid-cols-4'>
             <StatsRowItem
-               title='Highest'
+               title='All Time High'
                value={`${stats.ath.value}${valueType}`}
                timestamp={stats.ath.timestamp}
             />
             <StatsRowItem
-               title='Lowest'
+               title='All Time Low'
                value={`${stats.atl.value}${valueType}`}
                timestamp={stats.atl.timestamp}
             />
             <StatsRowItem
-               title='Average'
+               title='All Time Average'
                value={`${stats.avg}${valueType}`}
             />
             <StatsRowItem
@@ -97,20 +97,20 @@ const Statistics = () => {
          <div className='flex flex-col space-y-6'>
             {isLoading ? (
                <>
-                  <LoadingSkeleton title='All Time Temperature statistics' />
-                  <LoadingSkeleton title='All Time Humidity statistics' />
+                  <LoadingSkeleton title='Temperature statistics' />
+                  <LoadingSkeleton title='Humidity statistics' />
                </>
             ) : (
                temperatureStats &&
                humidityStats && (
                   <>
                      <StatsRow
-                        title='All Time Temperature statistics'
+                        title='Temperature statistics'
                         stats={temperatureStats}
                         valueType='°C'
                      />
                      <StatsRow
-                        title='All Time Humidity statistics'
+                        title='Humidity statistics'
                         stats={humidityStats}
                         valueType='%'
                      />
